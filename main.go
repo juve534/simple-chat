@@ -3,28 +3,16 @@ package main
 import (
 	"fmt"
 
-	"github.com/soveran/redisurl"
+	"github.com/juve534/simple-chat/src"
 )
 
 func main() {
-	conn, err := redisurl.ConnectToURL("telnet://redis:6379")
-	if err != nil {
-		fmt.Println(err)
-		panic(err)
-	}
-
 	userName := "testUser"
 	userKey := "online." + userName
 
-	val, err := conn.Do("SET", userKey, userName, "NX", "EX", "120")
-	if err != nil {
-		fmt.Println(err)
-		panic(err)
-	}
+	res := user.SaveUser(userName, userKey)
+	fmt.Println(res)
 
-	// 存在判定
-	if val == nil {
-		fmt.Println("既にオンラインです。")
-		panic(err)
-	}
+	ress := user.AddUserList(userName)
+	fmt.Println(ress)
 }
