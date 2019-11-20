@@ -29,3 +29,20 @@ func SaveUser(userName string, userKey string) interface{} {
 
 	return val
 }
+
+// AddUserList ユーザリストに新規接続ユーザを追加する
+func AddUserList(userName string) interface{} {
+	conn, err := redisurl.ConnectToURL("telnet://redis:6379")
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
+
+	val, err := conn.Do("SADD", userName, "NX", "EX", "120")
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
+
+	return val
+}

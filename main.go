@@ -12,4 +12,7 @@ func main() {
 
 	res := user.SaveUser(userName, userKey)
 	fmt.Println(res)
+
+	ress := user.AddUserList(userName)
+	fmt.Println(ress)
 }
